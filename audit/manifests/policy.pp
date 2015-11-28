@@ -4,6 +4,9 @@ define audit::policy (
     $failure,
   ) {
 
+  validate_bool($success)
+  validate_bool($failure)
+
   if $success == "true" and $failure == "false" {
     exec { $policy:
       command  => "auditpol.exe /set /subcategory:\"$policy\" /failure:'No Auditing' /success:Enable",
